@@ -1,12 +1,32 @@
 {
-  "pages":[
-    "pages/index/index"
+  "pages": [
+    "pages/index/index",
+    "pages/github/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black" ,
+    "list":[
+      {
+        "pagePath":"pages/index/index",
+        "text":"index",
+        "iconPath":"images/tabbar/index.png",
+        "selectedIconPath":"images/tabbar/index-selected.png"
+      },
+      {
+        "pagePath":"pages/github/index",
+        "text":"test",
+        "iconPath":"images/tabbar/github.png",
+        "selectedIconPath":"images/tabbar/github-selected.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
