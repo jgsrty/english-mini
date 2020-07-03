@@ -1,21 +1,23 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const homeApi = require('../../api/home')
+const homeApi = require('../../../api/home')
 
 Page({
   data: {
     motto: 'Hello World',
   },
   onLoad() {
-    this._getHomeInfos()
+    // this._getHomeInfos()
+  },
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        activeTab: 0
+      })
+    }
   },
   async _getHomeInfos() {
-    // homeApi.getHomeInfos(params).then(res => {
-    //   console.log(res)
-    // }).catch(err => {
-    //   console.log(err)
-    // })
     let res = await homeApi.getHomeInfos()
     if (res) {
       this.setData({
