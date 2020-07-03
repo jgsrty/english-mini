@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/home/index",
     "pages/github/index"
   ],
   "window": {
@@ -15,14 +15,14 @@
     "borderStyle": "black" ,
     "list":[
       {
-        "pagePath":"pages/index/index",
-        "text":"index",
+        "pagePath":"pages/home/index",
+        "text":"home",
         "iconPath":"images/tabbar/index.png",
         "selectedIconPath":"images/tabbar/index-selected.png"
       },
       {
         "pagePath":"pages/github/index",
-        "text":"test",
+        "text":"github",
         "iconPath":"images/tabbar/github.png",
         "selectedIconPath":"images/tabbar/github-selected.png"
       }
