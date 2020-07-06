@@ -1,22 +1,22 @@
-
 const access = '03b9b2071c3dc8ee98450';
 const token = 'a6cafe9f54406d6b36d'
+const baseUrl = 'https://api.github.com'
 const service = {
-  get (url,data) {
-    return new Promise((resolve,reject) => {
+  get(url, data) {
+    return new Promise((resolve, reject) => {
       wx.request({
         method: 'get',
-        url: url,
+        url: baseUrl + url,
         data: data,
         header: {
           "content-type": "application/json",
-          "Authorization":"token " + access + token
+          "Authorization": "token " + access + token
         },
-        success: (res) =>{
+        success: (res) => {
           // 调用接口成功
-          if(res.statusCode !== 200){
+          if (res.statusCode !== 200) {
             resolve(false)
-          }else{
+          } else {
             resolve(res.data)
           }
         },
@@ -24,7 +24,7 @@ const service = {
           // 调用接口失败
           wx.showToast({
             title: '服务器断开链接',
-            icon:'none',
+            icon: 'none',
             duration: 2000
           })
           resolve(false)
@@ -32,21 +32,21 @@ const service = {
       })
     })
   },
-  post (url,data) {
-    return new Promise((resolve,reject) => {
+  post(url, data) {
+    return new Promise((resolve, reject) => {
       wx.request({
         method: 'post',
-        url: url,
+        url: baseUrl + url,
         data: data,
         header: {
           "content-type": "application/x-www-form-urlencoded",
-          "Authorization":"token " + access + token
+          "Authorization": "token " + access + token
         },
-        success: (res) =>{
+        success: (res) => {
           // 调用接口成功
-          if(res.statusCode !== 200){
+          if (res.statusCode !== 200) {
             resolve(false)
-          }else{
+          } else {
             resolve(res.data)
           }
         },
@@ -54,7 +54,7 @@ const service = {
           // 调用接口失败
           wx.showToast({
             title: '服务器断开链接',
-            icon:'none',
+            icon: 'none',
             duration: 2000
           })
           resolve(false)

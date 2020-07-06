@@ -2,7 +2,7 @@
   "pages": [
     "pages/home/index/index",
     "pages/github/index/index",
-    "pages/audio/index/index"
+    "pages/player/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,15 +18,15 @@
     "list": [
       {
         "pagePath": "pages/home/index/index",
-        "text": "home",
-        "iconPath": "images/tabbar/home.png",
-        "selectedIconPath": "images/tabbar/home-selected.png"
+        "text": "home"
+      },
+      {
+        "pagePath": "pages/player/index/index",
+        "text": "player"
       },
       {
         "pagePath": "pages/github/index/index",
-        "text": "github",
-        "iconPath": "images/tabbar/github.png",
-        "selectedIconPath": "images/tabbar/github-selected.png"
+        "text": "github"
       }
     ]
   },

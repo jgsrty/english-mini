@@ -8,7 +8,7 @@ Page({
     motto: 'Hello World',
   },
   onLoad() {
-    // this._getHomeInfos()
+    this._getHomeInfos()
   },
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {

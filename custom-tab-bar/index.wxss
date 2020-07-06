@@ -33,6 +33,11 @@
   height: 27px;
 }
 
+.play-img{
+  width:48px;
+  height:48px;
+}
+
 .cover-view {
   font-size: 10px;
 }
