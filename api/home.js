@@ -1,10 +1,15 @@
-import service from '../utils/request'
+import gitee from '../utils/gitee'
 
 module.exports = {
-  getHomeInfos(params) {
-    return service.get('/repos/jgsrty/jgsrty.github.docs/contents/docs/english/2020', params)
+  // 获取项目目标路径
+  getDocsPath(url = '', params) {
+    return gitee.get('api/v5/repos/RtyXmd/jgsrty.github.docs/contents/docs/music/collection/' + url, params)
+  },
+  // 获取文件流
+  getDocsRaw(url){
+    return gitee.get(url)
   },
   getHomeList(params) {
-    return service.get('/repos/jgsrty/jgsrty.github.docs/contents/docs/english/2020/June/The%20next%20outbreak%20we%20are%20not%20ready.md', params)
+    // return gitee.get('/repos/jgsrty/jgsrty.github.docs/contents/docs/english/2020/June/The%20next%20outbreak%20we%20are%20not%20ready.md', params)
   }
 }

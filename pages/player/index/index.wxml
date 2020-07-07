@@ -1,2 +1,5 @@
 <!--pages/player/index/index.wxml-->
-<text>pages/player/index/index.wxml</text>
+<view>
+	<text>pages/player/index/index.wxml</text>
+  <button bindtap="_backPage">back</button>
+</view>

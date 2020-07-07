@@ -2,13 +2,33 @@
 //获取应用实例
 const app = getApp()
 const homeApi = require('../../../api/home')
+import base64 from '../../../utils/base64'
 
 Page({
   data: {
-    motto: 'Hello World',
+    musicFiles: [],
+    test: ''
+  },
+  async _playCurrentFile(e) {
+    let fileName = e.currentTarget.dataset.item.name
+    let res = await homeApi.getDocsPath(fileName)
+    if (res) {
+      let content = base64.decode(res.content)
+      this.setData({
+        test:content
+      })
+      console.log(content)
+      // let mdWords = await homeApi.getDocsRaw(res.download_url)
+      // if (mdWords) {
+      //   console.log(mdWords)
+      //   this.setData({
+      //     test: mdWords
+      //   })
+      // }
+    }
   },
   onLoad() {
-    this._getHomeInfos()
+    this._getDocsPath()
   },
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -17,12 +37,15 @@ Page({
       })
     }
   },
-  async _getHomeInfos() {
-    let res = await homeApi.getHomeInfos()
+  onHide: function () {
+    app.globalData.backTabIndex = 0
+  },
+  async _getDocsPath() {
+    let res = await homeApi.getDocsPath()
     if (res) {
       this.setData({
-        motto: res.authorizations_url
+        musicFiles: res
       })
     }
-  }
+  },
 })

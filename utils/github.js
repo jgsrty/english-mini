@@ -23,7 +23,7 @@ const service = {
         fail: (err) => {
           // 调用接口失败
           wx.showToast({
-            title: '服务器断开链接',
+            title: err.errMsg,
             icon: 'none',
             duration: 2000
           })

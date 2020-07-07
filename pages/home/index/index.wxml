@@ -1,4 +1,7 @@
 <!--index.wxml-->
 <view class="container">
-  {{motto}}
+  <view bindtap="_playCurrentFile" data-item="{{item}}" wx:for="{{musicFiles}}" wx:key="index">
+    <text>{{item.name}}</text>
+  </view>
+  <wemark md="{{test}}" link highlight type="wemark"></wemark>
 </view>

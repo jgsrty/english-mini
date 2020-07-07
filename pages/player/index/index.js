@@ -1,18 +1,29 @@
 // pages/player/index/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    
+  },
 
+  // 返回上一页
+  _backPage(){
+    // 上个tab下标，全局参数：backTabIndex
+    let index = app.globalData.backTabIndex
+    let url = this.getTabBar().data.list[index].pagePath
+    this.getTabBar().setData({
+      activeTab: index
+    })
+    wx.switchTab({url})
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
@@ -25,7 +36,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow () {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         activeTab: 1
@@ -37,14 +48,13 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
 
   /**
