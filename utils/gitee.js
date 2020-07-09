@@ -3,7 +3,6 @@ const baseUrl = 'https://gitee.com/'
 const service = {
   get(url, data) {
     let reqUrl = url.indexOf('http') === -1 ? baseUrl + url : url
-    console.log(reqUrl)
     return new Promise((resolve, reject) => {
       wx.request({
         method: 'get',

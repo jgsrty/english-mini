@@ -1,6 +1,9 @@
 // pages/github/index.js
 const app = getApp()
-Page({
+// store
+import store from '../../../store'
+import create from '../../../utils/create'
+create(store,{
 
   /**
    * 页面的初始数据

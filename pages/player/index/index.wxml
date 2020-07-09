@@ -1,5 +1,9 @@
 <!--pages/player/index/index.wxml-->
 <view>
-	<text>pages/player/index/index.wxml</text>
-  <button bindtap="_backPage">back</button>
+	<text>{{currentPlayFileName}}</text>
+	<button bindtap="_backPage">back</button>
+	<view>
+		<text>{{audioState}}</text>
+	</view>
+	<text>当前播放时间：{{currentTime}}</text>
 </view>

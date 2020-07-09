@@ -1,10 +1,12 @@
-Component({
+import create from '../utils/create'
+
+create({
   data: {
+    playState: '',
     activeTab: 0,
     color: "#a9b7b7",
     selectedColor: "#26397d",
-    list: [
-      {
+    list: [{
         pagePath: "/pages/home/index/index",
         text: "home",
         iconPath: "/images/tabbar/home.png",
@@ -14,9 +16,7 @@ Component({
         pagePath: "/pages/player/index/index",
         text: "player",
         iconPath: "/images/tabbar/play.png",
-        selectedIconPath: "/images/tabbar/play-selected.png",
-        iconPathPlay: "/images/tabbar/play.png",
-        selectedIconPathPlay: "/images/tabbar/play-selected.png",
+        selectedIconPath: "/images/tabbar/pause.png"
       },
       {
         pagePath: "/pages/github/index/index",
@@ -26,10 +26,13 @@ Component({
       }
     ]
   },
-  methods:{
-    switchTab(e){
+  methods: {
+    switchTab(e) {
+      this.store.data.isAddNew = false
       const url = e.currentTarget.dataset.path
-      wx.switchTab({url})
+      wx.switchTab({
+        url
+      })
     }
   }
 })

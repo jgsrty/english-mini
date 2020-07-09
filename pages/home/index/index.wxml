@@ -1,7 +1,14 @@
 <!--index.wxml-->
 <view class="container">
-  <view bindtap="_playCurrentFile" data-item="{{item}}" wx:for="{{musicFiles}}" wx:key="index">
-    <text>{{item.name}}</text>
-  </view>
-  <wemark md="{{test}}" link highlight type="wemark"></wemark>
+	<picker mode="multiSelector" bindchange="_bindMultiPickerChange" bindcolumnchange="_bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+		<view>
+      {{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
+		</view>
+	</picker>
+
+	<view bindtap="_playCurrentFile" data-item="{{item}}" wx:for="{{musicFiles}}" wx:key="index">
+		<text>{{item.name}}</text>
+	</view>
+
+	<wemark md="{{test}}" link highlight type="wemark"></wemark>
 </view>
