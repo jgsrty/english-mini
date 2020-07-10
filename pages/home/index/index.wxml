@@ -6,8 +6,9 @@
 		</view>
 	</picker>
 
-	<view bindtap="_playCurrentFile" data-item="{{item}}" wx:for="{{musicFiles}}" wx:key="index">
-		<text>{{item.name}}</text>
+	<view wx:for="{{musicFiles}}" wx:key="index">
+		<text bindtap="_playCurrentFile" data-item="{{item}}">{{item.title}}</text>
+		<text bindtap="_addToCollected" data-item="{{item}}">收藏</text>
 	</view>
 
 	<wemark md="{{test}}" link highlight type="wemark"></wemark>

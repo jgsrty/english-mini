@@ -21,13 +21,19 @@ create(store, {
     playState: '',
     // 播放文件路径array
     musicFiles: [],
-    // music路径
-    playMusicPath: 'https://jgsrty.github.io/rty-english/'
-    // playMusicPath:'https://rtyxmd.gitee.io/rtyresourcesmusic/'
+  },
+  // 添加收藏
+  _addToCollected(e) {
+    let current = e.currentTarget.dataset.item.title
+    let storage = new Set(wx.getStorageSync('collectedList') || [])
+    storage.add(current)
+    let storageArr = [...storage]
+    this.store.data.collectedList = storageArr
+    this.update()
+    wx.setStorageSync('collectedList', storageArr)
   },
   // 初始话当前月份文章
   _initCurrentMonthArticles() {
-    console.log(this.data.objectMultiArray)
     let year = new Date().getFullYear()
     let month = new Date().getMonth()
     let multiIndex = [0, 0]
@@ -49,11 +55,15 @@ create(store, {
     this.getRelateArticles()
   },
   // 读取对应文章
-  async getRelateArticles(){
+  async getRelateArticles() {
     let year = this.data.multiArray[0][this.data.multiIndex[0]]
     let month = this.data.multiArray[1][this.data.multiIndex[1]]
     let res = await homeApi.getDocsPath(`${year}/${month}`)
     if (res) {
+      res.map(item => {
+        let ind = item.name.indexOf('.md')
+        item.title = item.name.substring(0, ind)
+      })
       this.setData({
         musicFiles: res
       })
@@ -77,9 +87,9 @@ create(store, {
   },
   // 选择播放当前文件
   async _playCurrentFile(e) {
-    let fileName = e.currentTarget.dataset.item.name
-    let mediaUrl = fileName.replace('.md', '.mp3')
-    this.store.data.currentPlayFileName = this.data.playMusicPath + mediaUrl
+    let fileName = e.currentTarget.dataset.item.title
+    let mediaUrl = fileName
+    this.store.data.currentPlayFileName = mediaUrl
     // 更新播放图标状态
     this.store.data.playState = true
     this.store.data.isAddNew = true
@@ -92,27 +102,6 @@ create(store, {
     wx.switchTab({
       url
     })
-    return
-    let res = await homeApi.getDocsPath(fileName)
-    if (res) {
-      let content = base64.decode(res.content)
-      this.setData({
-        test: content
-      })
-      let mediaUrl = fileName.replace('.md', '.mp3')
-      this.store.data.currentPlayFileName = this.data.playMusicPath + mediaUrl
-      // 更新播放图标状态
-      this.store.data.playState = true
-      this.update()
-      // 切换至播放页
-      let url = this.getTabBar().data.list[1].pagePath
-      this.getTabBar().setData({
-        activeTab: 1
-      })
-      wx.switchTab({
-        url
-      })
-    }
   },
   onLoad() {
     this._getDocsPath()

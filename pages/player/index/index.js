@@ -14,7 +14,32 @@ create(store, {
   data: {
     currentPlayFileName: '',
     currentTime: '',
-    audioState: '获取歌曲中...'
+    collectedList: [],
+    audioState: '获取歌曲中...',
+    // music路径
+    playMusicPath: 'https://jgsrty.github.io/rty-english/'
+  },
+
+  // 播放当前选中
+  _playCurrent(e){
+    this._playFile(e.currentTarget.dataset.item)
+  },
+
+  // 播放文件
+  _playFile(name){
+    backAudio.title = name
+    backAudio.src = encodeURI(this.data.playMusicPath + name + '.mp3')
+    backAudio.play()
+    backAudio.onCanplay(() => {
+      this.setData({
+        audioState: '可以播放了'
+      })
+    })
+    backAudio.onTimeUpdate(() => {
+      this.setData({
+        currentTime: backAudio.currentTime
+      })
+    })
   },
 
   // 返回上一页
@@ -46,26 +71,17 @@ create(store, {
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    this.setData({
+      collectedList: this.store.data.collectedList
+    })
     if (this.store.data.isAddNew) {
-      backAudio.title = 'test'
-      backAudio.src = encodeURI(this.store.data.currentPlayFileName)
-      backAudio.play()
-      backAudio.onCanplay(() => {
-        this.setData({
-          audioState: '可以播放了'
-        })
+      let fileName = this.store.data.currentPlayFileName
+      this._playFile(fileName)
+    }
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        activeTab: 1
       })
-      backAudio.onTimeUpdate(() => {
-        this.setData({
-          currentTime: backAudio.currentTime
-        })
-      })
-      console.log(backAudio)
-      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-        this.getTabBar().setData({
-          activeTab: 1
-        })
-      }
     }
   },
 

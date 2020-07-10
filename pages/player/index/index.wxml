@@ -1,6 +1,8 @@
 <!--pages/player/index/index.wxml-->
 <view>
-	<text>{{currentPlayFileName}}</text>
+	<view wx:for="{{collectedList}}" wx:key="index">
+		<text bindtap="_playCurrent" data-item="{{item}}">{{item}}</text>
+	</view>
 	<button bindtap="_backPage">back</button>
 	<view>
 		<text>{{audioState}}</text>
