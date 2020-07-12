@@ -1,14 +1,17 @@
 <!--index.wxml-->
 <view class="container">
-	<picker mode="multiSelector" bindchange="_bindMultiPickerChange" bindcolumnchange="_bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+	<picker class="picker" mode="multiSelector" bindchange="_bindMultiPickerChange" bindcolumnchange="_bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
 		<view>
-      {{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
+			当前选择：{{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
 		</view>
 	</picker>
 
-	<view wx:for="{{musicFiles}}" wx:key="index">
-		<text bindtap="_playCurrentFile" data-item="{{item}}">{{item.title}}</text>
-		<text bindtap="_addToCollected" data-item="{{item}}">收藏</text>
+	<view class="article-list">
+		<view class="article-item" wx:for="{{musicFiles}}"   wx:key="index">
+			<text class="title" bindtap="_playCurrentFile" data-item="{{item}}">{{item.title}}</text>
+			<image wx:if="{{item.showCellect}}"  bindtap="_addToCollected" data-item="{{index}}" class="collect" src="../../../images/home/selected.png"></image>
+			<image wx:else bindtap="_addToCollected" data-item="{{index}}" class="collect" src="../../../images/home/select.png"></image>
+		</view>
 	</view>
 
 	<wemark md="{{test}}" link highlight type="wemark"></wemark>

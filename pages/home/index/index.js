@@ -24,13 +24,26 @@ create(store, {
   },
   // 添加收藏
   _addToCollected(e) {
-    let current = e.currentTarget.dataset.item.title
+    let ind = e.currentTarget.dataset.item
+    let current = this.data.musicFiles[ind].title
     let storage = new Set(wx.getStorageSync('collectedList') || [])
+    let text
+    text = storage.has(current) ? "已添加到收藏" : "收藏成功"
+    wx.showToast({
+      title: text,
+      icon: 'success',
+      duration: 2000
+    })
     storage.add(current)
     let storageArr = [...storage]
     this.store.data.collectedList = storageArr
     this.update()
     wx.setStorageSync('collectedList', storageArr)
+    let musicFiles = this.data.musicFiles
+    musicFiles[ind].showCellect = true
+    this.setData({
+      musicFiles
+    })
   },
   // 初始话当前月份文章
   _initCurrentMonthArticles() {
@@ -63,6 +76,10 @@ create(store, {
       res.map(item => {
         let ind = item.name.indexOf('.md')
         item.title = item.name.substring(0, ind)
+      })
+      let collectedList = this.store.data.collectedList
+      res.map(item => {
+        item.showCellect = collectedList.indexOf(item.title) > -1 ? true : false
       })
       this.setData({
         musicFiles: res

@@ -1,0 +1,26 @@
+.container {
+  padding: 0 5px
+}
+
+.picker {
+  height: 40px;
+  line-height: 40px;
+  background-color: #f6f6f6;
+}
+
+.article-item {
+  display: flex;
+  align-items: center;
+  border:1px solid #f6f6f6;
+  margin-top:5px;
+  padding:  5px 0
+}
+
+.title{
+  flex:1
+}
+
+.collect{
+  width:25px;
+  height:20px;
+}
