@@ -20,8 +20,20 @@ create(store, {
     playMusicPath: 'https://jgsrty.github.io/rty-english/'
   },
 
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
   // 播放当前选中
   _playCurrent(e){
+    this.hideModal()
     this._playFile(e.currentTarget.dataset.item)
   },
 
