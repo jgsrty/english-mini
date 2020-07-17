@@ -1,16 +1,16 @@
 <!--index.wxml-->
-<view class="container">
-	<picker class="picker" mode="multiSelector" bindchange="_bindMultiPickerChange" bindcolumnchange="_bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-		<view>
-			当前选择：{{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}
+<view class="container cu-card case cu-list menu">
+	<picker class="picker cu-item shadow flex" mode="multiSelector" bindchange="_bindMultiPickerChange" bindcolumnchange="_bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+		<view class="cu-item arrow flex justify-between">
+			<text>选择文章：</text>
+			<text class="text-grey">{{multiArray[0][multiIndex[0]]}} - {{multiArray[1][multiIndex[1]]}}</text>
 		</view>
 	</picker>
 
-	<view class="article-list">
-		<view class="article-item" wx:for="{{musicFiles}}"   wx:key="index">
+	<view class="article-list cu-list menu">
+		<view class="cu-item" wx:for="{{musicFiles}}" wx:key="index">
 			<text class="title" bindtap="_playCurrentFile" data-item="{{item}}">{{item.title}}</text>
-			<image wx:if="{{item.showCellect}}"  bindtap="_addToCollected" data-item="{{index}}" class="collect" src="../../../images/home/selected.png"></image>
-			<image wx:else bindtap="_addToCollected" data-item="{{index}}" class="collect" src="../../../images/home/select.png"></image>
+			<text bindtap="_addToCollected" data-item="{{index}}"  class="cuIcon-favorfill lg text-{{item.showCellect?'primary':'gray'}}"></text>
 		</view>
 	</view>
 

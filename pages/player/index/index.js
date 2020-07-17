@@ -12,10 +12,10 @@ create(store, {
    * 页面的初始数据
    */
   data: {
+    navHeight: '',
     currentPlayFileName: '',
     currentTime: '',
     collectedList: [],
-    audioState: '获取歌曲中...',
     // music路径
     playMusicPath: 'https://jgsrty.github.io/rty-english/'
   },
@@ -32,17 +32,18 @@ create(store, {
   },
 
   // 播放当前选中
-  _playCurrent(e){
+  _playCurrent(e) {
     this.hideModal()
     this._playFile(e.currentTarget.dataset.item)
   },
 
   // 播放文件
-  _playFile(name){
+  _playFile(name) {
     backAudio.title = name
     backAudio.src = encodeURI(this.data.playMusicPath + name + '.mp3')
     backAudio.play()
     backAudio.onCanplay(() => {
+      console.log('可以播放了')
       this.setData({
         audioState: '可以播放了'
       })
@@ -51,6 +52,21 @@ create(store, {
       this.setData({
         currentTime: backAudio.currentTime
       })
+    })
+    backAudio.onEnded(() => {
+      let list = this.data.collectedList
+      let nextInd = list.indexOf(name) + 1
+      if (nextInd.length > list.length) {
+        let nextFile = list[0]
+        backAudio.title = nextFile
+        backAudio.src = encodeURI(this.data.playMusicPath + nextFile + '.mp3')
+        backAudio.play()
+      } else {
+        let nextFile = list[nextInd]
+        backAudio.title = nextFile
+        backAudio.src = encodeURI(this.data.playMusicPath + nextFile + '.mp3')
+        backAudio.play()
+      }
     })
   },
 
@@ -70,7 +86,19 @@ create(store, {
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad(options) {
+
+    wx.getSystemInfo({
+      success: res => {
+        //导航高度
+        this.data.navHeight = res.statusBarHeight + 46;
+        console.log(this.data.navHeight)
+      },
+      fail(err) {
+        console.log(err);
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

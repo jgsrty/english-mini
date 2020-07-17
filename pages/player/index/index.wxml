@@ -1,24 +1,20 @@
 <!--pages/player/index/index.wxml-->
 <view>
+	<view class="custom-nav" style='height: {{navHeight}}px;'>
+		<view class="back-btn" bindtap="_backPage">
+			<text class="cuIcon-back"></text>
+			<text>返回</text>
+		</view>
+	</view>
 	<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
-		<view wx:for="{{collectedList}}" wx:key="index">
-			<text bindtap="_playCurrent" data-item="{{item}}">{{item}}</text>
-		</view>
-		<button bindtap="_backPage">back</button>
 		<view>
-			<text>{{audioState}}</text>
-		</view>
-		<text>当前播放时间：{{currentTime}}</text>
-		<view class='padding margin text-center'>
-			<view class='cu-btn bg-green lg block shadow radius margin-xl' bindtap="showModal" data-target="viewModal">
-				打开抽屉
-			</view>
+			<button bindtap="showModal" data-target="viewModal" class="cu-btn round">收藏列表</button>
 		</view>
 	</scroll-view>
 	<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
 		<text class="cuIcon-pullright"></text>
 	</view>
-	<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+	<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}" style="top: {{navHeight}}px;">
 		<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
 			<view class="cu-item" wx:for="{{collectedList}}" wx:key="index">
 				<view bindtap="_playCurrent" class="content" data-item="{{item}}" data-index="{{index}}">

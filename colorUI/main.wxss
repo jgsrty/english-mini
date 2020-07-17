@@ -30,6 +30,7 @@ page {
 	--gray: #aaaaaa;
 	--ghostWhite: #f1f1f1;
 	--white: #ffffff;
+	--primary: #26397d;
 	/* 浅色 */
 	--redLight: #fadbd9;
 	--orangeLight: #fde6d2;
@@ -3938,4 +3939,10 @@ scroll-view.cu-steps .cu-item {
 .line-white,
 .lines-white {
 	color: var(--white);
+}
+
+.text-primary,
+.line-primary,
+.lines-primary {
+	color: var(--primary);
 }
