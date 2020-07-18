@@ -56,7 +56,7 @@ create(store, {
     backAudio.onEnded(() => {
       let list = this.data.collectedList
       let nextInd = list.indexOf(name) + 1
-      if (nextInd.length > list.length) {
+      if (nextInd >= list.length) {
         let nextFile = list[0]
         backAudio.title = nextFile
         backAudio.src = encodeURI(this.data.playMusicPath + nextFile + '.mp3')
@@ -67,6 +67,13 @@ create(store, {
         backAudio.src = encodeURI(this.data.playMusicPath + nextFile + '.mp3')
         backAudio.play()
       }
+    })
+  },
+
+  // 快进
+  fastForward() {
+    wx.seekBackgroundAudio({
+      position: backAudio.currentTime + 5
     })
   },
 
@@ -92,7 +99,6 @@ create(store, {
       success: res => {
         //导航高度
         this.data.navHeight = res.statusBarHeight + 46;
-        console.log(this.data.navHeight)
       },
       fail(err) {
         console.log(err);
